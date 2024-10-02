@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/index.min.css' %}" />
+    <title>Vision PRO</title>
+  </head>
+  <body>
+    <div class="p-[5%]">
+      <div class="p-4 mb-12 flex items-center justify-between">
+        <a href="/" class="flex items-center">
+          <img
+            src="https://img.icons8.com/?size=100&id=40504&format=png&color=000000"
+            alt=""
+          />
+          <h3 class="text-4xl ml-4 font-bold">VISION PRO</h3>
+        </a>
+        <a href="/training">
+          <button
+            type="button"
+            class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+          >
+            <img
+              src="https://img.icons8.com/?size=100&id=53377&format=png&color=ffffff"
+              alt=""
+              class="h-[30px] object-contain mr-4"
+            />
+            Entraînement de la machine
+          </button>
+        </a>
+      </div>
+      {% if trained %}
+      <div class="my-8">
+        <span
+          class="bg-green-100 text-green-800 text-xl font-medium me-2 px-2.5 py-0.5 rounded"
+          >L'entraînement des données a réussi</span
+        >
+      </div>
+      {% endif %}
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">NOM</th>
+            <th scope="col" class="px-6 py-3">Téléphone</th>
+            <th scope="col" class="px-6 py-3">E-mail</th>
+            <th scope="col" class="px-6 py-3">Adresse</th>
+            <th scope="col" class="px-6 py-3">Nombres d'images</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for staff in staff_data %}
+          <tr class="bg-white border-b">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+            >
+              {{ staff.name }}
+            </th>
+            <td class="px-6 py-4">
+              {% if staff.phone %} {{ staff.phone }} {% else %} Pas de numéro de
+              téléphone fourni {% endif %}
+            </td>
+            <td class="px-6 py-4">
+              {% if staff.email %} {{ staff.email }} {% else %} Pas d'e-mail
+              fourni {% endif %}
+            </td>
+            <td class="px-6 py-4">
+              {% if staff.address %} {{ staff.address }} {% else %} Pas
+              d'adresse fournie {% endif %}
+            </td>
+            <td class="px-6 py-4">{{ staff.image_count }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center px-6 py-4">
+              Aucun membre du personnel trouvé.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if detection %}
+    <div class="flex flex-col items-center justify-center w-full my-12">
+      <a href="/" class="my-6">
+        <button
+          type="button"
+          class="focus:outline-none text-black border focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 flex items-center"
+        >
+          <img
+            src="https://img.icons8.com/?size=100&id=14297&format=png&color=000000"
+            alt=""
+            class="h-[30px] mr-4"
+          />
+          Annuler la détection
+        </button>
+      </a>
+      <img
+        src="{% url 'video_feed' %}"
+        alt="Video Feed"
+        class="w-[80dvw] mx-[10dvw]"
+      />
+    </div>
+    {% else %}
+    <div class="my-12 flex items-center justify-center w-full">
+      <a href="/detection">
+        <button
+          type="button"
+          class="focus:outline-none text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 flex items-center"
+        >
+          <img
+            src="https://img.icons8.com/?size=100&id=79315&format=png&color=ffffff"
+            alt=""
+            class="h-[30px] mr-4"
+          />
+          Lancer la détection
+        </button>
+      </a>
+    </div>
+    {% endif %}
+  </body>
+</html>
