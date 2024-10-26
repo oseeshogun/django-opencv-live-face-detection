@@ -1,6 +1,5 @@
 # face_recognition/camera.py
 import cv2
-import numpy as np
 
 from staff.models import Staff
 
@@ -27,10 +26,10 @@ class VideoCamera:
 
         for (x, y, w, h) in faces:
             id_, confidence = self.recognizer.predict(gray[y:y+h, x:x+w])
-            if confidence < 100:
+            if confidence < 60:
                 # Display the recognized ID on the frame
                 staff = Staff.objects.get(id=id_)
-                cv2.putText(frame, f'{staff.name}', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+                cv2.putText(frame, f'{staff.name} {confidence}', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
             else:
                 pass

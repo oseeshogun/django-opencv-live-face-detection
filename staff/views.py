@@ -4,6 +4,7 @@ from staff.models import Staff
 from staff.training import train_faces
 from django.http import StreamingHttpResponse
 from .camera import VideoCamera, gen
+from django.contrib.auth.decorators import login_required
 
 
 def _get_staff_data():
@@ -31,7 +32,7 @@ def index(request):
     data = _get_staff_data()
     return render(request, "index.html", {"staff_data": data})
 
-
+@login_required
 def training_view(request):
     train_faces()
     data = _get_staff_data()
