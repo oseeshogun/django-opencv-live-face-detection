@@ -28,10 +28,8 @@ Vision PRO is a web application designed to manage staff information and recogni
 ## Installation
 ------------
 
-1. Clone the repository: `git clone https://github.com/oseeshogun/vision-pro.git`
+1. Clone the repository: `git clone https://github.com/oseeshogun/django-opencv-live-face-detection.git`
 2. Install dependencies: `pip install -r requirements.txt`
-3. Create a new Django project: `django-admin startproject visionpro`
-4. Copy the [staff](cci:1://file:///Users/oseemasuaku/Documents/Projects/vision-pro/staff/models.py:14:0-16:53) app into the project directory
 5. Run migrations: `python manage.py migrate`
 6. Run the development server: `python manage.py runserver`
 
